@@ -1,3 +1,101 @@
+---
+weight: 1
+title: "使用Hugo搭建个人博客指南"
+date: 2022-10-29T16:18:50+08:00
+draft: true
+author: "KongHang"
+authorLink: "https://github.com/kongh"
+description: "使用Hugo搭建个人博客指南"
+images: []
+
+tags: ["Hugo", "Blog"]
+categories: ["Hugo"]
+
+lightgallery: true
+
+toc:
+  auto: false
+---
+# 使用Hugo搭建个人博客指南
+
+> 本文假设读者使用MacBook并且已经存在Git工具，若非此前提条件请提前安装对应的工具。
+
+## 一、安装Hugo
+
+### 1.1 安装
+
+```shell
+~ brew install hugo
+```
+
+### 1.2 验证
+
+```shell
+~ hugo version
+```
+
+## 二、创建项目
+
+### 2.1 创建名为blog的项目
+
+```shell
+~ hugo new site blog
+```
+
+### 2.2 打开项目
+
+本文使用 `vscode`来编写 `Markdown`文件，你可以选择任何编辑器来编写。但是，我们推荐你使用 `vscode`, 同时，这里有一份[安装指南](/posts/vscode-markdown-editor "安装指南")提供参考。
+
+### 2.3 初始化成git项目
+
+```shell
+~ git init
+~ git branch -m main
+~ git add .
+~ git commit -m "init"
+```
+
+### 2.4 添加主题
+
+```shell
+~ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+```
+
+### 2.5 修改配置文件，添加主题
+
+打开 `config.toml`文件,增加 `theme = "LoveIt"`配置。
+
+### 2.6 创建第一篇文章
+
+```shell
+~ hugo new posts/hugo-blog-guide/index.md
+```
+
+### 2.7 本地启动服务器，查看效果
+
+```shell
+~ hugo server -D
+```
+
+使用浏览器打开后，应该会看到如下效果。
+![Hugo Blog Example](hugo-blog-example.png "图2.6.1 Hugo Blog Example")
+
+## 三、优化项目
+
+### 3.1 主题LoveIt的示例项目
+
+在项目下 `themes/LoveIt/exampleSite`目录是例子的根目录。
+![LoveIt Theme Example](hugo-blog-example-dir.jpg "图3.1.1 LoveIt Theme Example Dir")
+
+首先，我们重点关注下 `config.toml`。由于篇幅比较大，特意将文件放到了另外一篇文章。点击[查看配置示例](/posts/hugo-loveit-config)。
+
+### 3.2 调整项目配置
+
+#### 3.2.1 基础配置
+
+拷贝如下内容到 `config.yaml`文件内，修改成你需要的样子，重启查看效果。
+
+```toml
 # 修改为你的发布地址
 baseURL = "https://example.com"
 
@@ -30,7 +128,7 @@ paginate = 12
 googleAnalytics = ""
 # copyright description used only for seo schema
 # 版权描述，仅仅用于 SEO
-copyright = ""
+copyright = "Kong Hang's Blog"
 
 # whether to use robots.txt
 # 是否使用 robots.txt
@@ -52,7 +150,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   name = "KongHang"
   email = "563796329@qq.com"
   link = "https://github.com/kongh"
+```
 
+#### 3.2.2 配置导航栏
+
+```toml
 # Menu config
 # 菜单配置
 [menu]
@@ -86,7 +188,11 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     name = "Categories"
     url = "/categories/"
     title = ""
+```
 
+#### 3.2.3 配置params
+
+```toml
 [params]
   # website title for Open Graph and Twitter Cards
   # 网站标题, 用于 Open Graph 和 Twitter Cards
@@ -110,7 +216,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
-      
+    
   # App icon config
   # 应用图标配置
   [params.app]
@@ -144,3 +250,19 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # special amount of posts in each home posts page
       # 主页每页显示文章数量
       paginate = 6
+```
+
+## 四、使用GitHub托管项目
+
+### 4.1 创建空项目
+
+按如图填写项目名称和描述创建一个空项目。
+
+![Github Repository](blog-github-repository.jpg "Github Repository")
+
+### 4.2 推送至远程仓库
+
+``` shell
+~ git remote add origin https://github.com/kongh/blog.git
+~ git push -u origin main
+```
