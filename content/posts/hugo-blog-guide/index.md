@@ -266,3 +266,46 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 ~ git remote add origin https://github.com/kongh/blog.git
 ~ git push -u origin main
 ```
+
+### 4.3 发布项目到Github Pages
+
+在项目目录下新增`.github/workflows/gh-pages.yml`文件，添加如下内容：
+
+``` yaml
+name: github pages
+
+on:
+  push:
+    branches:
+      - main  # Set a branch to deploy
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          # extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+```
+
+然后提交代码后会自动构建出`gh-pages`分支，然后，点击`Settings`-`Code and automation`-`Pages`，修改Github Pages Branch为`gh-pages`。
+
+![Github Pages Settings](github-build-deployment.jpg "Github pages build and deployment")
