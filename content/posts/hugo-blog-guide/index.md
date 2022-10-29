@@ -2,7 +2,7 @@
 weight: 1
 title: "使用Hugo搭建个人博客指南"
 date: 2022-10-29T16:18:50+08:00
-draft: true
+draft: false
 author: "KongHang"
 authorLink: "https://github.com/kongh"
 description: "使用Hugo搭建个人博客指南"
@@ -216,7 +216,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = "<i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i>"
-    
+  
   # App icon config
   # 应用图标配置
   [params.app]
@@ -262,16 +262,16 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 ### 4.2 推送至远程仓库
 
-``` shell
+```shell
 ~ git remote add origin https://github.com/kongh/blog.git
 ~ git push -u origin main
 ```
 
 ### 4.3 发布项目到Github Pages
 
-在项目目录下新增`.github/workflows/gh-pages.yml`文件，添加如下内容：
+在项目目录下新增 `.github/workflows/gh-pages.yml`文件，添加如下内容：
 
-``` yaml
+```yaml
 name: github pages
 
 on:
@@ -306,6 +306,6 @@ jobs:
           publish_dir: ./public
 ```
 
-然后提交代码后会自动构建出`gh-pages`分支，然后，点击`Settings`-`Code and automation`-`Pages`，修改Github Pages Branch为`gh-pages`。
+然后提交代码后会自动构建出 `gh-pages`分支，然后，点击 `Settings`-`Code and automation`-`Pages`，修改Github Pages Branch为 `gh-pages`。
 
 ![Github Pages Settings](github-build-deployment.jpg "Github pages build and deployment")

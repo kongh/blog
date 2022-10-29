@@ -2,7 +2,7 @@
 weight: 1
 title: "使用vscode作为markdown编辑器"
 date: 2022-10-29T14:18:50+08:00
-draft: true
+draft: false
 author: "KongHang"
 authorLink: "https://github.com/kongh"
 description: "使用vscode作为markdown编辑器"

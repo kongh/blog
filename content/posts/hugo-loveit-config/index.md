@@ -2,7 +2,7 @@
 weight: 1
 title: "Hugo Loveit 主题example配置文件"
 date: 2022-10-29T21:01:52+08:00
-draft: true
+draft: false
 author: "KongHang"
 authorLink: "https://github.com/kongh"
 description: "Hugo Loveit 主题example配置文件"
@@ -16,8 +16,7 @@ lightgallery: true
 toc:
   auto: false
 ---
-
-``` toml
+```toml
 baseURL = "https://example.com"
 
 # theme
