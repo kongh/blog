@@ -1,5 +1,5 @@
 # 修改为你的发布地址
-baseURL = "https://example.com"
+baseURL = 'https://kongh.github.io/blog'
 
 # theme
 # 主题
