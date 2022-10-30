@@ -569,9 +569,9 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         # 你可以参考官方文档来使用下列配置
         enable = true
         repo = "kongh/blog"
-        repoId = "559259652"
-        category = "Comments"
-        categoryId = "DIC_kwDOIVWgBM4CSRyA"
+        repoId = "R_kgDOIVWgBA"
+        category = "Announcements"
+        categoryId = "DIC_kwDOIVWgBM4CSRsY"
         # automatically adapt the current theme i18n configuration when empty
         # 为空时自动适配当前主题 i18n 配置
         lang = ""
