@@ -174,6 +174,39 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # 主页每页显示文章数量
       paginate = 6
 
+  # Site SEO config
+  # 网站 SEO 配置
+  [params.seo]
+    # image URL
+    # 图片 URL
+    image = "/images/Apple-Devices-Preview.png"
+    # thumbnail URL
+    # 缩略图 URL
+    thumbnailUrl = "/images/screenshot.png"
+
+  # Analytics config
+  # 网站分析配置
+  [params.analytics]
+    enable = true
+    # Google Analytics
+    [params.analytics.google]
+      id = "G-XJ7ZN5MSCV"
+      # whether to anonymize IP
+      # 是否匿名化用户 IP
+      anonymizeIP = true
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # server url for your tracker if you're self hosting
+      # 自行托管追踪器时的主机路径
+      server = ""
+    # Plausible Analytics
+    [params.analytics.plausible]
+      dataDomain = ""
+    # Yandex Metrica
+    [params.analytics.yandexMetrica]
+      id = ""
+
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
 [markup]
