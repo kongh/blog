@@ -571,7 +571,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
         repo = "kongh/blog"
         repoId = "559259652"
         category = "Announcements"
-        categoryId = "Announcements"
+        categoryId = "DIC_kwDOIVWgBM4CSRsY"
         # automatically adapt the current theme i18n configuration when empty
         # 为空时自动适配当前主题 i18n 配置
         lang = ""
