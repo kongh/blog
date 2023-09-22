@@ -1,0 +1,99 @@
+<!doctype html><html lang=en><head><title>人工智能|从部署开源模型Llama2认识机器学习 · Hang's Blog</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="Hang Kong"><meta name=description content="AI|ML|使用Ubuntu和Docker部署Llama2"><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="人工智能|从部署开源模型Llama2认识机器学习"><meta name=twitter:description content="AI|ML|使用Ubuntu和Docker部署Llama2"><meta property="og:title" content="人工智能|从部署开源模型Llama2认识机器学习"><meta property="og:description" content="AI|ML|使用Ubuntu和Docker部署Llama2"><meta property="og:type" content="article"><meta property="og:url" content="https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-09-22T23:50:33+08:00"><meta property="article:modified_time" content="2023-09-22T23:50:33+08:00"><link rel=canonical href=https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/><link rel=preload href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as=font type=font/woff2 crossorigin><link rel=stylesheet href=/blog/css/coder.min.ea4c355c5f9913809f506132a80bf3fab84f2679dee370f334f7385a36d24c38.css integrity="sha256-6kw1XF+ZE4CfUGEyqAvz+rhPJnne43DzNPc4WjbSTDg=" crossorigin=anonymous media=screen><link rel=stylesheet href=/blog/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=icon type=image/svg+xml href=/images/favicon.svg sizes=any><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/images/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=/blog>Hang's Blog</a>
+<input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/blog/posts/>Blog</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/>人工智能|从部署开源模型Llama2认识机器学习</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa fa-calendar" aria-hidden=true></i>
+<time datetime=2023-09-22T23:50:33+08:00>September 22, 2023</time></span>
+<span class=reading-time><i class="fa fa-clock-o" aria-hidden=true></i>
+2-minute read</span></div><div class=categories><i class="fa fa-folder" aria-hidden=true></i>
+<a href=/blog/categories/ai/>AI</a></div><div class=tags><i class="fa fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/blog/tags/ai/>AI</a></span>
+<span class=separator>•</span>
+<span class=tag><a href=/blog/tags/ml/>ML</a></span></div></div></header><div class=post-content><h1 id=人工智能从部署开源模型llama2认识机器学习>人工智能|从部署开源模型Llama2认识机器学习
+<a class=heading-link href=#%e4%ba%ba%e5%b7%a5%e6%99%ba%e8%83%bd%e4%bb%8e%e9%83%a8%e7%bd%b2%e5%bc%80%e6%ba%90%e6%a8%a1%e5%9e%8bllama2%e8%ae%a4%e8%af%86%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><h2 id=引言>引言
+<a class=heading-link href=#%e5%bc%95%e8%a8%80><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p><code>Llama2</code>是<a href=https://ai.meta.com/llama/ class=external-link target=_blank rel=noopener>Meta AI</a>开源的大模型。截止目前，它算是比较好的开源大模型。</p><p>但是，从部署的效果来看，比<code>ChatGPT</code>的推理能力、写作能力还有一些小差距。</p><p>部署后的试用效果：</p><p><img src=llama2_first.jpg alt="Markdown Plugin" title="Markdown Plugin"></p><p><img src=llama2_second.jpg alt="Markdown Plugin" title="Markdown Plugin"></p><p><img src=llama2_third.jpg alt="Markdown Plugin" title="Markdown Plugin"></p><p>以上只是我个人短暂试用的结果, 你可以在完成部署后使用自己的测试会话来测试<code>Llama2</code>。</p><h2 id=llama2-chinese>Llama2 Chinese
+<a class=heading-link href=#llama2-chinese><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><h3 id=模型介绍>模型介绍
+<a class=heading-link href=#%e6%a8%a1%e5%9e%8b%e4%bb%8b%e7%bb%8d><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p><a href=https://github.com/FlagAlpha/Llama2-Chinese class=external-link target=_blank rel=noopener>Llama中文社区</a>是一个专注于Llama模型在中文方面的优化和上层建设的高级技术社区。 <em>基于大规模中文数据，从预训练开始对Llama2模型进行中文能力的持续迭代升级</em>。</p><p>我们部署的<a href=https://huggingface.co/FlagAlpha class=external-link target=_blank rel=noopener>Llama2-Chinese-7b-Chat模型</a>可以在<code>huggingface</code>找到。</p><p><em>需要注意<a href=https://huggingface.co class=external-link target=_blank rel=noopener>https://huggingface.co</a>在国内无法打开，需要科学上网。</em></p><h3 id=docker文件>Docker文件
+<a class=heading-link href=#docker%e6%96%87%e4%bb%b6><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>我们的部署案例使用的<code>Dockerfile</code>文件在<code>Fork</code>项目里，点击这里<a href=https://github.com/kongh/Llama2-Chinese/blob/kh/docker/Dockerfile class=external-link target=_blank rel=noopener>直接查看</a>。</p><p><em>将项目<code>clone</code>到你本地查看<code>Dockerfile</code></em>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>~ git clone https://github.com/kongh/Llama2-Chinese.git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>~ git checkout kh
+</span></span></code></pre></div><h2 id=使用aliyun部署模型>使用Aliyun部署模型
+<a class=heading-link href=#%e4%bd%bf%e7%94%a8aliyun%e9%83%a8%e7%bd%b2%e6%a8%a1%e5%9e%8b><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p><em>整个部署大概耗时1个小时，所以，费用一般就20元左右。</em></p><h3 id=购买机器>购买机器
+<a class=heading-link href=#%e8%b4%ad%e4%b9%b0%e6%9c%ba%e5%99%a8><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>在这里我们选择阿里云的<a href="https://www.aliyun.com/product/ecs/gpu?spm=5176.28055625.J_4VYgf18xNlTAyFFbOuOQe.124.5421154a66k86R&amp;scm=20140722.X_data-6aa38cfeb8b6253d5762._.V_1" class=external-link target=_blank rel=noopener>GPU服务器</a>, 优先选择配置<code>GPU: 24G</code>的服务器。</p><ol><li>选购机器</li></ol><p><img src=aliyun_buy_ec2_1.png alt=选购机器></p><ol start=2><li>镜像和存储</li></ol><p><img src=aliyun_buy_ec2_2.png alt=镜像和存储></p><ol start=3><li>网络和登录凭证</li></ol><p><img src=aliyun_buy_ec2_3.png alt=网络和登录凭证></p><h3 id=启动模型>启动模型
+<a class=heading-link href=#%e5%90%af%e5%8a%a8%e6%a8%a1%e5%9e%8b><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><ol><li>登录服务器</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>~ ssh root@your server ip
+</span></span></code></pre></div><ol start=2><li>查看GPU驱动</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>~ nvidia-smi
+</span></span></code></pre></div><p><img src=nvidia-smi.png alt=nvidia-smi></p><ol start=3><li>安装docker</li></ol><p>你可以直接参考<a href=https://docs.docker.com/engine/install/ubuntu/ class=external-link target=_blank rel=noopener>https://docs.docker.com/engine/install/ubuntu/</a>安装, 也可以直接使用如下命令。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># Add Docker&#39;s official GPG key:</span>
+</span></span><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install ca-certificates curl gnupg
+</span></span><span class=line><span class=cl>sudo install -m <span class=m>0755</span> -d /etc/apt/keyrings
+</span></span><span class=line><span class=cl>curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class=p>|</span> sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+</span></span><span class=line><span class=cl>sudo chmod a+r /etc/apt/keyrings/docker.gpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Add the repository to Apt sources:</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=s2>&#34;deb [arch=&#34;</span><span class=k>$(</span>dpkg --print-architecture<span class=k>)</span><span class=s2>&#34; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+</span></span></span><span class=line><span class=cl><span class=s2>  &#34;</span><span class=k>$(</span>. /etc/os-release <span class=o>&amp;&amp;</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=nv>$VERSION_CODENAME</span><span class=s2>&#34;</span><span class=k>)</span><span class=s2>&#34; stable&#34;</span> <span class=p>|</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Install docker</span>
+</span></span><span class=line><span class=cl>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Verify</span>
+</span></span><span class=line><span class=cl>docker info
+</span></span></code></pre></div><ol start=4><li>构建镜像</li></ol><p>由于模型约10G，大约需要40分钟才能构建完成，请耐心等待。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 创建目录</span>
+</span></span><span class=line><span class=cl>~ mkdir ai <span class=o>&amp;&amp;</span> <span class=nb>cd</span> ai
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 克隆项目</span>
+</span></span><span class=line><span class=cl>~ git clone https://github.com/kongh/Llama2-Chinese.git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 切换分支</span>
+</span></span><span class=line><span class=cl>~ git checkout kh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 构建镜像</span>
+</span></span><span class=line><span class=cl>~ docker build -f docker/Dockerfile -t flagalpha/llama2-chinese-7b:gradio .
+</span></span></code></pre></div><ol start=5><li>安装<code>NVIDIA Container Toolkit</code></li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># Configure the repository</span>
+</span></span><span class=line><span class=cl>curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey <span class=p>|</span> sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=o>&amp;&amp;</span> curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list <span class=p>|</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    sed <span class=s1>&#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39;</span> <span class=p>|</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=o>&amp;&amp;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    sudo apt-get update
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Install the NVIDIA Container Toolkit packages:</span>
+</span></span><span class=line><span class=cl>sudo apt-get install -y nvidia-container-toolkit
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Configure the container runtime by using the nvidia-ctk command:</span>
+</span></span><span class=line><span class=cl>sudo nvidia-ctk runtime configure --runtime<span class=o>=</span>docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Restart the Docker daemon:</span>
+</span></span><span class=line><span class=cl>sudo systemctl restart docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Option, restart the server</span>
+</span></span><span class=line><span class=cl>sudo reboot
+</span></span></code></pre></div><p>参考链接：<a href=https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html class=external-link target=_blank rel=noopener>https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html</a></p><ol start=5><li>启动/停止/删除容器</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 启动容器</span>
+</span></span><span class=line><span class=cl>docker run -d --name llama2 --gpus all -p 7860:7860 flagalpha/llama2-chinese-7b:gradio
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看日志</span>
+</span></span><span class=line><span class=cl>docker logs llama2 -f
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 停止容器</span>
+</span></span><span class=line><span class=cl>docker stop llama2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除容器</span>
+</span></span><span class=line><span class=cl>docker rm llama2
+</span></span></code></pre></div><ol start=6><li>配置安全组，开放端口<code>7860</code></li></ol><p><img src=security_group.png alt=配置安全组></p><ol start=7><li>试用Llama2</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>http://yourserverip:7860
+</span></span></code></pre></div><p>哈哈哈，开始畅快的玩耍吧！！！</p><h3 id=释放服务器>释放服务器
+<a class=heading-link href=#%e9%87%8a%e6%94%be%e6%9c%8d%e5%8a%a1%e5%99%a8><i class="fa fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>没有办法因为穷！！！</p><p>在服务器列表，点击<code>停止</code>按钮停止服务器，最后点击<code>释放设置</code>彻底释放服务器。</p><p><img src=release_server.png alt=释放服务器></p></div><footer></footer></article></section></div><footer class=footer><section class=container>©
+2022 -
+2023
+Hang Kong
+·
+Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/blog/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>
