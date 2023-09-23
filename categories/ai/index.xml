@@ -1,25 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on Hang's Blog</title><link>https://kongh.github.io/blog/categories/ai/</link><description>Recent content in AI on Hang's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 22 Sep 2023 23:50:33 +0800</lastBuildDate><atom:link href="https://kongh.github.io/blog/categories/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>人工智能|从部署开源模型Llama2认识机器学习</title><link>https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/</link><pubDate>Fri, 22 Sep 2023 23:50:33 +0800</pubDate><guid>https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/</guid><description>人工智能|从部署开源模型Llama2认识机器学习 Link to heading 引言 Link to heading Llama2是Meta AI开源的大模型。截止目前，它算是比较好的开源大模型。
-但是，从部署的效果来看，比ChatGPT的推理能力、写作能力还有一些小差距。
-部署后的试用效果：
-以上只是我个人短暂试用的结果, 你可以在完成部署后使用自己的测试会话来测试Llama2。
-Llama2 Chinese Link to heading 模型介绍 Link to heading Llama中文社区是一个专注于Llama模型在中文方面的优化和上层建设的高级技术社区。 基于大规模中文数据，从预训练开始对Llama2模型进行中文能力的持续迭代升级。
-我们部署的Llama2-Chinese-7b-Chat模型可以在huggingface找到。
-需要注意https://huggingface.co在国内无法打开，需要科学上网。
-Docker文件 Link to heading 我们的部署案例使用的Dockerfile文件在Fork项目里，点击这里直接查看。
-将项目clone到你本地查看Dockerfile。
-~ git clone https://github.com/kongh/Llama2-Chinese.git ~ git checkout kh 使用Aliyun部署模型 Link to heading 整个部署大概耗时1个小时，所以，费用一般就20元左右。
-购买机器 Link to heading 在这里我们选择阿里云的GPU服务器, 优先选择配置GPU: 24G的服务器。
-选购机器 镜像和存储 网络和登录凭证 启动模型 Link to heading 登录服务器 ~ ssh root@your server ip 查看GPU驱动 ~ nvidia-smi 安装docker 你可以直接参考https://docs.</description></item><item><title>人工智能|机器学习开篇——从大模型开始认识机器学习</title><link>https://kongh.github.io/blog/posts/ml/ml-from-big-model/</link><pubDate>Wed, 20 Sep 2023 23:31:18 +0800</pubDate><guid>https://kongh.github.io/blog/posts/ml/ml-from-big-model/</guid><description>人工智能|机器学习开篇——从大模型开始认识机器学习 Link to heading 引言 Link to heading 在当今数字化时代，人工智能（AI）和机器学习（ML）已经成为科技领域的焦点。它们正在改变着我们的生活方式、商业模式和社会互动方式，无论是在自动驾驶汽车中的应用，还是在智能手机上的语音助手中，都可以看到AI和ML的身影。然而，要理解这些复杂的技术，首先需要从基础开始，了解它们的核心原理。
-本文的主题是“从大模型开始认识机器学习”，我们将从一个引人注目的大型模型ChatGPT开始，逐步深入了解机器学习的基本概念。ChatGPT不仅代表了AI领域的最新成就，还将帮助我们更好地理解机器学习的核心原理和应用。
-在本文中，我们将首先介绍ChatGPT，这是一个令人兴奋的自然语言处理模型，它具有出色的文本生成和理解能力。然后，我们将探讨机器学习的基础知识，包括数据驱动的决策、模型和算法。最后，我们将深入研究ChatGPT的机器学习实践，了解它是如何被训练和应用的。
-通过本文的阅读，我们希望读者能够更好地理解AI和机器学习的核心概念，以及它们如何塑造着我们的未来。无论您是一名学生、一名工程师还是一个对技术充满好奇心的个体，这篇文章都将为您提供有关AI和机器学习的入门知识，以便您更深入地探索这个令人激动的领域。让我们开始这次探索之旅吧！
-第一部分：ChatGPT 与大型模型 Link to heading 1.1 ChatGPT 的简介 Link to heading ChatGPT是当今人工智能领域最引人注目的成就之一，代表了自然语言处理（NLP）领域中的最新进展。它不仅能够理解和生成自然语言文本，还可以进行复杂的对话和文本生成任务。让我们首先来了解一下ChatGPT的一些关键特点。
-ChatGPT的起源 Link to heading ChatGPT由OpenAI团队开发，是GPT（生成对抗网络）系列模型的最新成员。OpenAI是一个在人工智能和机器学习研究方面备受瞩目的组织，他们的目标是推动AI技术的前沿。ChatGPT的出现源于对自然语言处理能力的不断追求，以实现更加智能的对话系统。
-ChatGPT的规模 Link to heading 一个引人注目的特点是ChatGPT的规模。这个模型拥有数十亿个参数，远超过了以前的NLP模型。这种规模意味着ChatGPT可以处理巨大的语料库，从中学习到更复杂和精细的语言模式。这也是为什么ChatGPT能够表现出出色的文本生成和理解能力的重要原因。
-ChatGPT的应用领域 Link to heading ChatGPT的强大功能使其在各种应用领域都能发挥作用。它可以用于自动化客服，为网站和应用提供智能聊天支持。此外，ChatGPT还可用于虚拟助手，如语音助手、智能家居设备等，使用户能够通过自然语言与计算机进行互动。在教育、医疗保健和研究领域，ChatGPT还可以帮助分析文本、生成报告以及进行自动化文档处理。
-1.2 大型模型的背后 Link to heading ChatGPT之所以如此强大，背后有着复杂的技术原理和构成要素。让我们深入探讨大型模型的内部机制和背后的科学原理。
-深度学习基础 Link to heading 深度学习是实现ChatGPT等大型模型的核心技术。它是一种模仿人脑神经元工作方式的计算方法，通过神经网络实现对复杂数据的建模。在ChatGPT中，深度学习的神经网络由多个层次组成，每一层都可以捕获不同级别的语言特征。这种分层结构使得ChatGPT能够理解和生成自然语言文本。
-自然语言处理 Link to heading 自然语言处理（NLP）是ChatGPT的基础。NLP是一门研究如何使计算机理解和处理人类语言的学科。在ChatGPT中，NLP技术使模型能够分析文本，提取关键信息，并生成与人类语言相似的回复。NLP的进步对ChatGPT等大型模型的性能至关重要。
-大型模型的挑战 Link to heading 尽管大型模型如ChatGPT具有强大的能力，但它们也面临一些挑战。训练和部署这些模型需要大量的计算资源，这对于许多组织来说可能是一项昂贵的投资。此外，大型模型容易受到数据偏差和模型偏差的影响，需要采取额外的措施来减轻这些问题。
-在本部分中，我们深入了解了ChatGPT及其背后的技术原理。下一步，我们将探讨机器学习的基础概念，以帮助读者更好地理解ChatGPT的训练和应用。
-第二部分：机器学习的基础概念 Link to heading 2.1 什么是机器学习？ Link to heading 机器学习是实现人工智能的关键技术之一，它让计算机能够从数据中学习并提高性能，而无需显式编程。这一部分将深入探讨机器学习的核心概念和不同类型。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>AI on Hang&#39;s Blog</title>
+    <link>https://kongh.github.io/blog/categories/ai/</link>
+    <description>Recent content in AI on Hang&#39;s Blog</description>
+    <image>
+      <title>Hang&#39;s Blog</title>
+      <url>https://kongh.github.io/blog/papermod-cover.png</url>
+      <link>https://kongh.github.io/blog/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 22 Sep 2023 23:50:33 +0800</lastBuildDate><atom:link href="https://kongh.github.io/blog/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>人工智能|从部署开源模型Llama2认识机器学习</title>
+      <link>https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/</link>
+      <pubDate>Fri, 22 Sep 2023 23:50:33 +0800</pubDate>
+      
+      <guid>https://kongh.github.io/blog/posts/ml/ml-deploy-llama2/</guid>
+      <description>AI|ML|使用Ubuntu和Docker部署Llama2</description>
+    </item>
+    
+    <item>
+      <title>人工智能|机器学习开篇——从大模型开始认识机器学习</title>
+      <link>https://kongh.github.io/blog/posts/ml/ml-from-big-model/</link>
+      <pubDate>Wed, 20 Sep 2023 23:31:18 +0800</pubDate>
+      
+      <guid>https://kongh.github.io/blog/posts/ml/ml-from-big-model/</guid>
+      <description>AI|ML|从大模型开始认识机器学习</description>
+    </item>
+    
+  </channel>
+</rss>
